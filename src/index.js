@@ -2,8 +2,9 @@ import projects from "./project";
 import cards from "./card";
 
 const pro = document.querySelector(".Pro");
-const content = document.querySelector("#content")
-// 1. Create the instance
+const content = document.querySelector("#content");
+
+const projectList = [];
 let myProject = new projects(); 
 // 2. Define 'form' so the listener knows what you're talking about
 const form = myProject.formElement;
@@ -19,6 +20,7 @@ myProject.formElement.addEventListener("submit", (e) => {
 
     // Update the instance
     Object.assign(myProject, data);
+    projectList.push({ ...data })
     form.remove(); 
     mycards.create();
     console.log("Updated Instance:", myProject);
