@@ -1,7 +1,9 @@
 export default class Card {
-    constructor(project, trigger) {
+    constructor(project, trigger, Delte, onEdit) {
         this.project = project;
-        this.trigger = trigger; // Fixed: using the correct name
+        this.trigger = trigger; // trigger rendering
+        this.Delte = Delte; // delte button
+        this.onEdit = onEdit;
         this.pre = document.createElement("div");
         this.pre.id = "Pre-layout";
         this.content = document.querySelector("#content");
@@ -17,7 +19,7 @@ export default class Card {
         this.pre.appendChild(this.addBtn);
     }
 
-    create() {
+    create(index) {
         const card = document.createElement("div");
         card.className = "project-card";
 
@@ -35,8 +37,21 @@ export default class Card {
                 <small>Notes: ${this.project.notes}</small>
             </div>
         `;
+         const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => {
+        this.Delte(index); // 👈 tells main.js to remove from array and localStorage
+    });
+
+    const editbtn = document.createElement("button");
+    editbtn.textContent= "Edit";
+    editbtn.addEventListener("click", () => {
+        this.onEdit(index);
+    } );
 
         // INSERT BEFORE the button so the button stays at the bottom
+        card.appendChild(editbtn);
+         card.appendChild(deleteBtn);
         this.pre.insertBefore(card, this.addBtn);
     }
 
@@ -44,4 +59,9 @@ export default class Card {
         // Clear the screen and pop the whole layout in
         this.content.appendChild(this.pre);
     }
+
+    clear() {
+    const oldCards = this.pre.querySelectorAll(".project-card");
+    oldCards.forEach(card => card.remove());
+}
 }
