@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/Yami4286/To-do-list#readme",
   "devDependencies": {
+    "css-loader": "^7.1.4",
     "html-webpack-plugin": "^5.6.6",
+    "style-loader": "^4.0.0",
     "webpack": "^5.105.4",
     "webpack-cli": "^7.0.2",
     "webpack-merge": "^6.0.1"

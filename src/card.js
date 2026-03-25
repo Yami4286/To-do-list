@@ -16,7 +16,6 @@ export default class Card {
         // Fixed: Use this.trigger here
         this.addBtn.onclick = () => this.trigger();
         
-        this.pre.appendChild(this.addBtn);
     }
 
     create(index) {
@@ -52,7 +51,8 @@ export default class Card {
         // INSERT BEFORE the button so the button stays at the bottom
         card.appendChild(editbtn);
          card.appendChild(deleteBtn);
-        this.pre.insertBefore(card, this.addBtn);
+          this.pre.appendChild(card)
+        
     }
 
     render() {
@@ -60,6 +60,10 @@ export default class Card {
         this.content.appendChild(this.pre);
     }
 
+    addButton() {
+    this.content.appendChild(this.addBtn); // 👈 only appends when called
+     }
+ 
     clear() {
     const oldCards = this.pre.querySelectorAll(".project-card");
     oldCards.forEach(card => card.remove());

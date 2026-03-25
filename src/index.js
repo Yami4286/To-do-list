@@ -1,8 +1,10 @@
 import projects from "./project";
 import cards from "./card";
+import "./style.css";
 
 const pro = document.querySelector(".Pro");
 const content = document.querySelector("#content");
+const home = document.querySelector(".home");
 
 const projectList = [];
 let myProject = new projects(); 
@@ -10,6 +12,7 @@ const form = myProject.formElement;
 const rendering = ()=>{
     myProject.Render();
 };
+
 
 // delete project button function
 const deleteProject = (index) => {
@@ -81,9 +84,23 @@ myProject.formElement.addEventListener("submit", (e) => {
 
 // event listener for the projects button
 pro.addEventListener("click", ()=> { 
+    renderAll();
     mycards.render();
+     mycards.addButton();
+   
 })
 
+home.addEventListener("click", ()=>{ 
+    content.innerHTML = "";
+      mycards.clear();
+    const highPriority = projectList.filter(project => project.priority === "High");
+
+highPriority.forEach((projectData) => {
+    Object.assign(myProject, projectData);
+    mycards.create(); // no index needed - no delete or edit here
+});
+mycards.render();
+})
 
 const footer = document.createElement("footer");
 footer.textContent="The Shadow Project";
